@@ -1,0 +1,19 @@
+[project]
+name = "comfyui-apiko"
+version = "0.1.0"
+description = "Nano Banana, GPT Image, Seedream, Seedance, Kling, Wan and chat models in ComfyUI through one APIKO API key."
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+dependencies = []
+classifiers = ["Operating System :: OS Independent"]
+
+[project.urls]
+Homepage = "https://apiko.app/"
+Repository = "https://github.com/tong0619453646-dev/comfyui-apiko"
+Documentation = "https://github.com/tong0619453646-dev/comfyui-apiko#readme"
+"Bug Tracker" = "https://github.com/tong0619453646-dev/comfyui-apiko/issues"
+
+[tool.comfy]
+PublisherId = "apiko"
+DisplayName = "APIKO: Nano Banana, Seedance, Kling, Wan API"
+Icon = "https://raw.githubusercontent.com/tong0619453646-dev/comfyui-apiko/main/assets/logo-400.png"

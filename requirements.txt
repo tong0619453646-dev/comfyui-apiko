@@ -1,0 +1,1 @@
+# No extra packages: ComfyUI already ships torch, numpy and Pillow, and the client uses the Python standard library.
