@@ -36,7 +36,7 @@ No extra Python packages are needed. The `VIDEO` output needs a ComfyUI release 
    - set the environment variable `APIKO_API_KEY` before starting ComfyUI, or
    - create `custom_nodes/comfyui-apiko/api_key.txt` containing only the key.
 
-The key is not a node input on purpose. ComfyUI saves node inputs into workflow files and into the metadata of every PNG it writes, so a key typed into a node would leak the moment you share an image or workflow. The nodes send the key only to `https://api.apiko.app` and never print it.
+The key is not a node input on purpose. ComfyUI saves node inputs into workflow files and into the metadata of every PNG it writes, so a key typed into a node would leak the moment you share an image or workflow. The nodes send the key to the configured API host and never print it. The default base URL is `https://api.apiko.app`. To override it, set `APIKO_BASE_URL` before starting ComfyUI.
 
 ## Models
 
@@ -48,7 +48,7 @@ The drop-downs list the models on [apiko.app/models](https://apiko.app/models) a
 | Video | [Seedance 2.5](https://apiko.app/models/seedance-2.5), Seedance 2.0 / 2.0 Fast / 2.0 Mini, [Kling 4.0](https://apiko.app/models/kling-4.0), [Wan 3.0 image-to-video](https://apiko.app/models/wan3.0-image-to-video), Wan 3.0 text-to-video and reference-to-video (and Prime), MiniMax H3, Grok Imagine Video 1.5, Gemini Omni 1.1 Flash |
 | Text | Gemini 3.5 Flash, GPT-6 Astra, Claude Sonnet 5.5, Claude Opus 5.5, DeepSeek V4 Pro, Qwen 3.8 Max, Kimi K3, GLM 5.3 |
 
-Before each job the node reads the model's request schema from the API. Fields the model does not take (for example `quality` on Nano Banana) are left out, and values it would refuse (a resolution it does not offer, a duration out of range, a missing first frame for Wan image-to-video) stop the node with a clear message before anything is billed.
+When the node has the model's request schema, it validates parameters locally before submitting an image or video job. It drops unsupported fields (for example `quality` on Nano Banana) and stops with a clear message if a value is invalid or a required field is missing. If the model list is temporarily unavailable, the node submits the request and lets the APIKO gateway validate it. An HTTP 401 or 403 from the model list stops submission.
 
 ## Inputs worth knowing
 
